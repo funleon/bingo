@@ -1,0 +1,485 @@
+/* 基礎樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ffd93d;
+    --dark-bg: #2c3e50;
+    --light-bg: #ecf0f1;
+    --text-color: #2c3e50;
+    --border-radius: 12px;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+}
+
+/* 標題 */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    z-index: 10;
+}
+
+header h1 {
+    font-size: 2.5em;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 主要內容區域 */
+main {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* 側邊欄 */
+.control-panel,
+.results-panel {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+    width: 280px;
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.results-panel {
+    flex-shrink: 0;
+}
+
+.settings-group h2,
+.status-group h3,
+.drawn-list-group h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.status-group p {
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+
+/* 表單 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--light-bg);
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
+}
+
+/* 按鈕 */
+.btn-primary,
+.btn-secondary,
+.btn-draw {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-color), #ff8787);
+    color: white;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-secondary {
+    width: 100%;
+    background: var(--light-bg);
+    color: var(--text-color);
+    border: 2px solid var(--primary-color);
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-draw {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), #ff8787);
+    color: white;
+    font-size: 1.2em;
+    margin: 20px auto;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+    transform: scale(1);
+}
+
+.btn-draw:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(255, 107, 107, 0.6);
+}
+
+.btn-draw:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 主要區域 */
+.main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+}
+
+/* 球籠動畫 */
+.bingo-machine {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin-bottom: 20px;
+}
+
+.cage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 8px solid #333;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent),
+                linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.3),
+                inset 5px 5px 15px rgba(255, 255, 255, 0.3),
+                0 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.cage::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from 0deg, transparent 0deg 45deg, rgba(0, 0, 0, 0.05) 45deg 90deg);
+    animation: cageSlowRotate 8s linear infinite;
+    z-index: 5;
+    pointer-events: none;
+}
+
+@keyframes cageSlowRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.balls-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ball {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, var(--primary-color), #ff8787);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    animation: ballRoll 4s ease-in-out infinite;
+}
+
+.ball::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+/* 球的滾動動畫 - 每個球都會有不同的動畫 */
+@keyframes ballRoll {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(var(--tx1), var(--ty1)) rotate(90deg);
+    }
+    50% {
+        transform: translate(var(--tx2), var(--ty2)) rotate(180deg);
+    }
+    75% {
+        transform: translate(var(--tx3), var(--ty3)) rotate(270deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+
+.machine-stand {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 40px;
+    background: linear-gradient(180deg, #333, #222);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 當回抽取 */
+.current-draw {
+    background: var(--light-bg);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.current-draw h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.drawn-balls-display {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    min-height: 60px;
+    align-items: center;
+}
+
+.drawn-ball-item {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-color), #ffd93d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #333;
+    box-shadow: 0 4px 15px rgba(255, 217, 61, 0.4);
+    animation: drawBallPopIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes drawBallPopIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 已抽獎球列表 */
+.drawn-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-height: calc(100vh - 280px);
+    overflow-y: auto;
+}
+
+.drawn-list-item {
+    background: linear-gradient(135deg, var(--secondary-color), #44b3aa);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    box-shadow: 0 2px 8px rgba(78, 205, 196, 0.2);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 花火特效 */
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.firework {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.firework-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: explode 1.2s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+}
+
+/* 捲軸美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff5252;
+}
+
+/* 響應式設計 */
+@media (max-width: 1400px) {
+    main {
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .control-panel,
+    .results-panel {
+        width: 240px;
+        padding: 15px;
+    }
+
+    .bingo-machine {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn-draw {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 1000px) {
+    main {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-panel,
+    .results-panel {
+        width: 100%;
+        max-height: none;
+    }
+
+    .drawn-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>賓果遊戲系統</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎰 賓果遊戲系統</h1>
+        </header>
+
+        <main>
+            <!-- 左側: 設置面板 -->
+            <aside class="control-panel">
+                <div class="settings-group">
+                    <h2>遊戲設置</h2>
+                    
+                    <div class="form-group">
+                        <label for="minNumber">最小號碼</label>
+                        <input type="number" id="minNumber" min="1" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="maxNumber">最大號碼</label>
+                        <input type="number" id="maxNumber" min="1" value="90">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ballCount">一次抽幾顆球</label>
+                        <input type="number" id="ballCount" min="1" max="10" value="1">
+                    </div>
+
+                    <button id="applySettings" class="btn-primary">套用設置</button>
+                </div>
+
+                <div class="status-group">
+                    <h3>遊戲統計</h3>
+                    <p>已抽球數: <span id="drawnCount">0</span> / <span id="totalBalls">90</span></p>
+                    <p>配置號碼數: <span id="configCount">0</span></p>
+                    <button id="resetGame" class="btn-secondary">重置遊戲</button>
+                </div>
+            </aside>
+
+            <!-- 中央: 球籠動畫和抽球按鈕 -->
+            <section class="main-area">
+                <div class="bingo-machine">
+                    <div class="cage">
+                        <div class="balls-container" id="ballsContainer">
+                            <!-- 球會動態生成 -->
+                        </div>
+                    </div>
+                    <div class="machine-stand"></div>
+                </div>
+
+                <button id="drawButton" class="btn-draw">抽球</button>
+
+                <!-- 當回抽取的球 -->
+                <div class="current-draw">
+                    <h3>本次抽取</h3>
+                    <div class="drawn-balls-display" id="drawnBallsDisplay">
+                        <!-- 抽取的球會顯示在這裡 -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右側: 已抽獎球列表 -->
+            <aside class="results-panel">
+                <div class="drawn-list-group">
+                    <h2>已抽獎球列表</h2>
+                    <div class="drawn-list" id="drawnList">
+                        <!-- 已抽獎球會列在這裡 -->
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- 花火特效容器 -->
+    <div id="fireworksContainer" class="fireworks-container"></div>
+
+    <script src="assets/js/bingo.js"></script>
+</body>
+</html>
