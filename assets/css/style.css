@@ -16,11 +16,31 @@
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-html, body {
+html {
     width: 100%;
     height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: #faf6f3;
+    background-image: 
+        /* 樱花花瓣圖案 */
+        radial-gradient(circle at 15% 20%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(255, 192, 203, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 45% 70%, rgba(230, 190, 210, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 75% 85%, rgba(255, 182, 193, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 25% 90%, rgba(240, 200, 220, 0.2) 0%, transparent 50%),
+        /* 拼布紋理 */
+        linear-gradient(45deg, rgba(200, 150, 180, 0.1) 25%, transparent 25%, transparent 75%, rgba(200, 150, 180, 0.1) 75%, rgba(200, 150, 180, 0.1)),
+        linear-gradient(45deg, rgba(210, 160, 190, 0.1) 25%, transparent 25%, transparent 75%, rgba(210, 160, 190, 0.1) 75%, rgba(210, 160, 190, 0.1));
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 30px 30px;
+    background-attachment: fixed;
     overflow: hidden;
 }
 
@@ -30,15 +50,17 @@ html, body {
     display: flex;
     flex-direction: column;
     color: var(--text-color);
+    background: transparent;
 }
 
 /* 標題 */
 header {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.3);
     padding: 20px;
     text-align: center;
     box-shadow: var(--shadow);
     z-index: 10;
+    backdrop-filter: blur(6px);
 }
 
 header h1 {
@@ -61,12 +83,13 @@ main {
 /* 側邊欄 */
 .control-panel,
 .results-panel {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: var(--border-radius);
     padding: 20px;
     box-shadow: var(--shadow);
     overflow-y: auto;
     width: 280px;
+    backdrop-filter: blur(6px);
 }
 
 .control-panel {
@@ -190,11 +213,12 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: var(--border-radius);
     padding: 30px;
     box-shadow: var(--shadow);
     overflow-y: auto;
+    backdrop-filter: blur(8px);
 }
 
 /* 球籠動畫 */
